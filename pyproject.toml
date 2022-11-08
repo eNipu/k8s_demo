@@ -27,7 +27,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 format = "app:code_format"
-start = "app:start_server"
+start = "app:start"
 
 
 [tool.pytest.ini_options]

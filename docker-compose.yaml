@@ -1,0 +1,11 @@
+version: "2"
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: k8s-app
+    image: k8s:demo
+    ports:
+      - "6001:6001"
+    command: bash -c "uvicorn --reload app:app --host=0.0.0.0 --port=6001"
