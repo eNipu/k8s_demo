@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-demo-deployment
+  # namespace: k8s-demo-project
+  labels:
+    app: k8s-demo # This is the label that will be used by service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: k8s-demo # This is the label that will be used by pod
+  template:
+    metadata:
+      labels:
+        app: k8s-demo # label to select the pod
+    spec:
+      containers:
+        - name: k8s-demo-container
+          image: k8s:demo
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 6001

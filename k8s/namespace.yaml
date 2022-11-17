@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: k8s-demo-project
+  labels:
+    name: k8s-demo-project

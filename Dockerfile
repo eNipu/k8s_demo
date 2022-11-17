@@ -1,7 +1,7 @@
 # `python-base` sets up all our shared environment variables
 FROM python:3.10.8-bullseye as python-base
 
-# python
+# python environment variables
 ENV PYTHONUNBUFFERED=1 \
     # prevents python creating .pyc files
     PYTHONDONTWRITEBYTECODE=1 \
