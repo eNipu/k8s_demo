@@ -74,7 +74,8 @@ WORKDIR /app
 COPY . /app
 
 
-# EXPOSE 5000
+EXPOSE 3001
+ENTRYPOINT ["uvicorn", "--reload", "app:app", "--host", "0.0.0.0", "--port=3001"]
 # CMD ["uvicorn", "--reload", "app:start"]
 # CMD ["poetry", "run", "start"]
 

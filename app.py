@@ -28,9 +28,6 @@ def health():
     return {"status": "ok"}
 
 
-def start():
-    uvicorn.run(app, host="127.0.0.1", port=5000)  # type: ignore
-
-
-# if __name__ == "__main__":
-#     start()
+@app.get("/id = {id}")
+def get_id(id: int):
+    return {"id": 1}

@@ -6,7 +6,7 @@ metadata:
   labels:
     app: k8s-demo # This is the label that will be used by service
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: k8s-demo # This is the label that will be used by pod
@@ -19,5 +19,13 @@ spec:
         - name: k8s-demo-container
           image: k8s:demo
           imagePullPolicy: Never
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3001
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+            periodSeconds: 10
+            failureThreshold: 3
           ports:
-            - containerPort: 6001
+            - containerPort: 3001
