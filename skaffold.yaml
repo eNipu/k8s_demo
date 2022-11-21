@@ -1,0 +1,17 @@
+apiVersion: skaffold/v4beta1
+kind: Config
+metadata:
+  name: k-s-demo
+build:
+  artifacts:
+  - image: k8s
+    docker:
+      dockerfile: Dockerfile
+    sync:
+      manual:
+      - src: 'k8s_demo/**'
+        dest: .
+manifests:
+  rawYaml:
+  - k8s/deployment.yaml
+  - k8s/service.yaml

@@ -28,6 +28,12 @@ def health():
     return {"status": "ok"}
 
 
-@app.get("/id = {id}")
-def get_id(id: int):
+@app.get("/id")
+def get_id():
     return {"id": 1}
+
+@app.get("/name/", name="name")
+def get_name(name: str):
+    tmp = name
+    print(tmp)
+    return {"name": tmp}
