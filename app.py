@@ -1,6 +1,7 @@
 import os
 import sys
 import uvicorn
+import json
 
 from fastapi import FastAPI
 
@@ -40,3 +41,13 @@ def get_name(name: str):
     tmp = name
     print(tmp)
     return {"name": tmp}
+
+@app.get("/db/") 
+def get_db():
+    file_path = "config/db.json"
+    if os.path.isfile(file_path):
+        with open(file_path) as json_file:
+            data = json.load(json_file)
+            return data
+    else:
+        return {"error": "db.conf not found"}
