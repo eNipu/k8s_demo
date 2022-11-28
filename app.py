@@ -4,13 +4,15 @@ import uvicorn
 
 from fastapi import FastAPI
 
-app = FastAPI(
-    title="k8s-demo",
-    description="k8s Demo using FastAPI",
-    version="0.1.0",
-    contact={"name": "k8s-demo", "url": "localhost:5000"},
-    debug=True,
-)
+# app = FastAPI(
+#     title="k8s-demo",
+#     description="k8s Demo using FastAPI",
+#     version="0.1.0",
+#     contact={"name": "k8s-demo", "url": "localhost:5000"},
+#     debug=True,
+# )
+
+app = FastAPI(DEBUG=True)
 
 
 # run the code_format.sh script
