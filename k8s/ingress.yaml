@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-dag
+  namespace: k8s-demo-namesapace
 spec:
   rules:
   - host: k8s.dag.com

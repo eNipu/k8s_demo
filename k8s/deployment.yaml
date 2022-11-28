@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: k8s-demo-deployment
+  namespace: k8s-demo-namesapace
   # namespace: k8s-demo-project
   labels:
     app: k8s-demo # This is the label that will be used by service
