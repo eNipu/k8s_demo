@@ -2,6 +2,7 @@ import requests # pip install requests
 
 #node_ip:node_port
 url = "http://192.168.59.105:32000"
+url = "http://k8s.dag.com:80"
 
 # get the root
 def get_root():

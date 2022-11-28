@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: k8s-demo-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: k8s-demo
   ports:
     - protocol: TCP
-      port: 32001
+      port: 81
       targetPort: 3001
-      nodePort: 32000
+      # nodePort: 30001
