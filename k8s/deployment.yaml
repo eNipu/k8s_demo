@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: k8s-demo-deployment
   namespace: k8s-demo-namesapace
-  # namespace: k8s-demo-project
   labels:
     app: k8s-demo # This is the label that will be used by service
 spec:
@@ -32,8 +31,15 @@ spec:
             - containerPort: 3001
           volumeMounts:
           - name: host-mount
-            mountPath: /app/comfig
+            mountPath: /app/config
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "0.5"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
       volumes:
         - name: host-mount
           hostPath:
-            path: ~$HOME/<path>/k8s_demo/config
+            path: /k8s_demo/config

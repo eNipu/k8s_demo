@@ -23,12 +23,12 @@ def code_format():
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {"Hello": "K8s demo"}
 
 
 @app.get("/health")
 def health():
-    print("health check")
+    # print("health check")
     return {"status": "ok"}
 
 
@@ -36,13 +36,15 @@ def health():
 def get_id():
     return {"id": 1}
 
+
 @app.get("/name/", name="name")
 def get_name(name: str):
     tmp = name
     print(tmp)
     return {"name": tmp}
 
-@app.get("/db/") 
+
+@app.get("/db/")
 def get_db():
     file_path = "config/db.json"
     if os.path.isfile(file_path):
