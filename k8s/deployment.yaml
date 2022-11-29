@@ -42,4 +42,4 @@ spec:
       volumes:
         - name: host-mount
           hostPath:
-            path: /k8s_demo/config
+            path: /Users/al-amin/Development/Playground/k8s_demo/config
