@@ -1,0 +1,29 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: postgres-pv
+  namespace: k8s-demo-namespace
+  labels:
+    type: local
+    app: k8s-demo
+spec:
+  # persistentVolumeReclaimPolicy: Delete
+  storageClassName: manual
+  capacity:
+    storage: 2Gi
+  # volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    # path: /Users/al-amin/Development/Playground/k8s_demo/data/postgres
+    path: "/var/lib/"
+  # local:
+  #    path: /Users/al-amin/Development/Playground/k8s_demo/data/postgres
+  # nodeAffinity:
+  #   required:
+  #     nodeSelectorTerms:
+  #       - matchExpressions:
+  #           - key: kubernetes.io/hostname
+  #             operator: In
+  #             values:
+  #               - minikube

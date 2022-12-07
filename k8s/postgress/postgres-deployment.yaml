@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  namespace: k8s-demo-namesapace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-container
+  template:
+    metadata:
+      labels:
+        app: postgres-container
+        # tier: backend
+    spec:
+      # terminationGracePeriodSeconds: 10
+      # securityContext:
+      #   runAsUser: 1000
+      #   fsGroup: 1000
+      containers:
+        - name: postgres-container
+          image: postgres:13
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+          # env:
+          #   - name: POSTGRES_DB
+          #     value: "postgres"
+          #   - name: POSTGRES_USER
+          #     value: "postgres"
+          #   - name: POSTGRES_PASSWORD
+          #     value: "postgres"
+          #   - name: PGDATA
+          #     value: /var/lib/postgresql/data
+          # envFrom:
+          #   - secretRef:
+          #       name: postgres-secret
+          # command:
+          # - /bin/chown
+          # - R 999:999
+          # - /var/lib/postgresql/data
+          # ports:
+          #   - containerPort: 5432
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "0.5"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+          volumeMounts:
+            - name: postgres-volume-mount
+              mountPath: /var/lib/postgresql/data
+              # subPath: postgres
+              # readOnly: false
+      volumes:
+        - name: postgres-volume-mount
+          persistentVolumeClaim:
+            claimName: postgres-pvc
