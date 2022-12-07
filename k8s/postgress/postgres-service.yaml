@@ -2,10 +2,10 @@ kind: Service
 apiVersion: v1
 metadata:
   name: postgres-service
-  namespace: k8s-demo-namesapace
+  # namespace: k8s-demo-namesapace
 spec:
   selector:
-    app: postgres-container
+    app: postgres
   ports:
     - protocol: TCP
       port: 5432

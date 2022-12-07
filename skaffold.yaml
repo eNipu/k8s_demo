@@ -13,7 +13,7 @@ build:
         dest: .
 manifests:
   rawYaml:
-  - k8s/namespace/namespace.yaml
+  # - k8s/namespace/namespace.yaml
   - k8s/postgress/postgres-service.yaml
   - k8s/postgress/postgres-config.yaml
   - k8s/postgress/postgres-pvc.yaml
