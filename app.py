@@ -2,6 +2,7 @@ import os
 import sys
 import uvicorn
 import json
+import psycopg2
 
 from fastapi import FastAPI
 
@@ -53,3 +54,23 @@ def get_db():
             return data
     else:
         return {"error": "db.conf not found"}
+
+# connect to the postgres kubernates service using the service name postgres-service, the port is 5432 and the database is postgres
+@app.get("/postgres/")
+def connect():
+    conn = None
+    try:
+        conn = psycopg2.connect(host="postgres-service", database="postgres", user="postgres" , password="password", port="5432", sslmode="disable")
+        cur = conn.cursor()
+        cur.execute("CREATE TABLE IF NOT EXISTS test (id serial PRIMARY KEY, name varchar);")
+        cur.execute("INSERT INTO test (name) VALUES ('Amin');")
+        cur.execute("SELECT * FROM test")
+        row = cur.fetchone()
+        while row is not None:
+            print(row)
+            return {"id": row[0], "name": row[1]}
+        conn.commit()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    # finally:
+    #     return {"error": "error connecting to database"}
