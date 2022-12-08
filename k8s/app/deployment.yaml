@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: k8s-demo-deployment
-  namespace: k8s-demo-namesapace
+  # namespace: k8s-demo-namesapace
   labels:
     app: k8s-demo # This is the label that will be used by service
 spec:
@@ -15,6 +15,11 @@ spec:
       labels:
         app: k8s-demo # label to select the pod
     spec:
+      initContainers:
+        - name: init-postgres-service
+          image: postgres:latest
+          command: ['sh', '-c', 'until pg_isready -h postgres-service.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local -p 5432; do echo waiting for database; sleep 2; done;']
+
       containers:
         - name: k8s-demo-container
           image: k8s:demo
@@ -42,4 +47,4 @@ spec:
       volumes:
         - name: host-mount
           hostPath:
-            path: /k8s_demo/config
+            path: /Users/al-amin/Development/Playground/k8s_demo/config
