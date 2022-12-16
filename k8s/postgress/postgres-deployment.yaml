@@ -4,33 +4,33 @@ metadata:
   name: postgres
   # namespace: k8s-demo-namesapace
 spec:
-  selector:
-   matchLabels:
-    app: postgres
   replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
   template:
     metadata:
       labels:
         app: postgres
     spec:
       containers:
-        - name: postgres
-          image: postgres:latest
-          imagePullPolicy: "IfNotPresent"
-          envFrom:
-            - configMapRef:
-                name: postgres-config
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: postgredb
-          resources:
-            requests:
-              memory: "512Mi"
-              cpu: "0.5"
-            limits:
-              memory: "1Gi"
-              cpu: "1"
+      - name: postgres
+        image: postgres:latest
+        imagePullPolicy: "IfNotPresent"
+        envFrom:
+        - configMapRef:
+            name: postgres-config
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgres/data
+        resources:
+          requests:
+            memory: "500Mi"
+            cpu: ".5"
+          limits:
+            memory: "128Mi"
+            cpu: "1"
       volumes:
-        - name: postgredb
-          persistentVolumeClaim:
-            claimName: postgres-pv-claim
+      - name: data
+        persistentVolumeClaim:
+          claimName: postgres-pv-claim
